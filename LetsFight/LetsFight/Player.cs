@@ -9,6 +9,8 @@ namespace LetsFight
     class Player
     {
         public string Playername;
+        public bool isBot;
+        public int Ressources;
         public int Village_counter;
         public int Offensive_Units;
         public int Defensive_Units;

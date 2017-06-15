@@ -1,1 +1,7 @@
 c:\users\bastian\documents\visual studio 2013\Projects\LetsFight\LetsFight\bin\Debug\LetsFight.exe.config
+C:\Users\Bastian\Documents\GitHub\LetsFight\LetsFight\LetsFight\bin\Debug\LetsFight.exe.config
+C:\Users\Bastian\Documents\GitHub\LetsFight\LetsFight\LetsFight\bin\Debug\LetsFight.exe
+C:\Users\Bastian\Documents\GitHub\LetsFight\LetsFight\LetsFight\bin\Debug\LetsFight.pdb
+C:\Users\Bastian\Documents\GitHub\LetsFight\LetsFight\LetsFight\obj\Debug\LetsFight.csprojResolveAssemblyReference.cache
+C:\Users\Bastian\Documents\GitHub\LetsFight\LetsFight\LetsFight\obj\Debug\LetsFight.exe
+C:\Users\Bastian\Documents\GitHub\LetsFight\LetsFight\LetsFight\obj\Debug\LetsFight.pdb
