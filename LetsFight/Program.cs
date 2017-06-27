@@ -10,8 +10,7 @@ namespace LetsFight
     {
         static void Main(string[] args)
         {
-            Program prog = new Program();
-            Player me = prog.createPlayer(false, "Basti");
+            Player me = new Player("Basti", false, -1);
             Unit unit = new Unit();
 
             int numberOfFighters = 0;
@@ -43,20 +42,7 @@ namespace LetsFight
 
             Console.ReadKey();
         }
-        private Player createPlayer(bool isBot, string playername = null, int count = 0)
-        {
-            Player player = new Player();
-            const int MAX_RESSOURCES = 10000;
-            if(playername == null && count == 0)
-            {
-                ErrorMessage("Es muss ein count oder ein playername angegeben werden");
-            }
-            player.Playername = playername != null ? playername : "player_" + count ;
-            player.Playername = isBot ? "bot_" + count : player.Playername;     //If player isBot change name
-            player.isBot = isBot;
-            player.Ressources = MAX_RESSOURCES;
-            return player;
-        }
+
         public static void ErrorMessage(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
