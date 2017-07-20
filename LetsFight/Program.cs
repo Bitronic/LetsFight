@@ -27,7 +27,8 @@ namespace LetsFight
             Console.WriteLine("Anzahl {0}:", unitCaption);
             uint soldierCount = Convert.ToUInt32(Console.ReadLine());
             Unit u = new Unit(unitCaption, soldierCount, strategy, soldierDetails);
-            p.AddUnit(u);
+            if(!p.AddUnit(u))
+                Console.WriteLine("Ungenügende Ressourcen!");
             Console.WriteLine("Übrige Ressourcen: {0}", p.Ressources + Environment.NewLine);
         }
 
