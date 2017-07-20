@@ -24,6 +24,8 @@ namespace LetsFight
             this.playerName = isBot ? "bot_" + (char)count : (playerName != null) ? playerName : "player_" + (char)count;
             this.isBot = isBot;
             this.ressources = MAX_RESSOURCES;
+            this.offensiveUnits = new List<Unit>();
+            this.defensiveUnits = new List<Unit>();
         }
 
         public void AddRessources(uint amount) {
