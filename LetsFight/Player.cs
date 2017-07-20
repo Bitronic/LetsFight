@@ -35,10 +35,13 @@ namespace LetsFight
                 : MAX_RESSOURCES;
         }
 
-        public void RemoveRessources(uint amount) {
-            this.ressources = (amount > this.ressources)
-                ? 0
-                : this.ressources - amount;
+        public bool RemoveRessources(uint amount) {
+            if (amount < this.ressources) {
+                this.ressources -= amount;
+                return true;
+            }
+
+            return false;
         }
 
         public void AddVillage() {
@@ -49,16 +52,20 @@ namespace LetsFight
             this.lostVillages++;
         }
 
-        public void AddUnit(Unit unit) {
-            this.RemoveRessources(unit.RessourceCost);
-            switch(unit.Strategy) {
-                case Unit.StrategyType.Offensive:
-                    this.offensiveUnits.Add(unit);
-                    break;
-                case Unit.StrategyType.Defensive:
-                    this.defensiveUnits.Add(unit);
-                    break;
+        public bool AddUnit(Unit unit) {
+            bool success = false;
+            if (success = this.RemoveRessources(unit.RessourceCost)) {
+                switch (unit.Strategy) {
+                    case Unit.StrategyType.Offensive:
+                        this.offensiveUnits.Add(unit);
+                        break;
+                    case Unit.StrategyType.Defensive:
+                        this.defensiveUnits.Add(unit);
+                        break;
+                }
             }
+
+            return success;
         }
 
         public string PlayerName {
