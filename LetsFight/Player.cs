@@ -38,7 +38,11 @@ namespace LetsFight
 
         public int Ressources {
             get { return this.ressources; }
-            set { this.ressources = value; }
+            set {
+                this.ressources = value <= MAX_RESSOURCES
+                ? value
+                : MAX_RESSOURCES;
+            }
         }
 
         public int VillageCounter {
