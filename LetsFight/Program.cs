@@ -10,37 +10,25 @@ namespace LetsFight
     {
         static void Main(string[] args)
         {
-            Player me = new Player("Basti", false, -1);
-            Unit unit = new Unit();
-
-            int numberOfFighters = 0;
-            int numberOfSpys = 0;
-            int numberOfKnights = 0;
-            int numberOfKings = 0;
+            Player p = new Player("Basti", false, 0);
 
             //Error catching for letters incoming
-            Console.WriteLine("Ressourcen die dir zur Verfügung stehen: " + me.Ressources);
-            Console.WriteLine("Anzahl Fighters: ");
-            numberOfFighters = Convert.ToInt32(Console.ReadLine());
-            me.Ressources -= numberOfFighters * unit.Fighter.RessourceCosts;
-            Console.WriteLine("Übrige Ressourcen: " + me.Ressources + Environment.NewLine);
+            Console.WriteLine("Ressourcen die dir zur Verfügung stehen: " + p.Ressources);
 
-            Console.WriteLine("Anzahl Spys: ");
-            numberOfSpys = Convert.ToInt32(Console.ReadLine());
-            me.Ressources -= numberOfSpys * unit.Spy.RessourceCosts;
-            Console.WriteLine("Übrige Ressourcen: " + me.Ressources + Environment.NewLine);
-
-            Console.WriteLine("Anzahl Knights: ");
-            numberOfKnights = Convert.ToInt32(Console.ReadLine());
-            me.Ressources -= numberOfKnights * unit.Knight.RessourceCosts;
-            Console.WriteLine("Übrige Ressourcen: " + me.Ressources + Environment.NewLine);
-
-            Console.WriteLine("Anzahl Kings: ");
-            numberOfKings = Convert.ToInt32(Console.ReadLine());
-            me.Ressources -= numberOfKings * unit.King.RessourceCosts;
-            Console.WriteLine("Übrige Ressourcen: " + me.Ressources + Environment.NewLine);
+            PrepareUnit(p, "Fighter", Unit.StrategyType.Offensive, new Soldier(100, 50, 50));
+            PrepareUnit(p, "Spy", Unit.StrategyType.Defensive, new Soldier(30, 15, 5));
+            PrepareUnit(p, "Knight", Unit.StrategyType.Offensive, new Soldier(250, 150, 100));
+            PrepareUnit(p, "King", Unit.StrategyType.Defensive, new Soldier(20, 2000, 10));
 
             Console.ReadKey();
+        }
+
+        public static void PrepareUnit(Player p, string unitCaption, Unit.StrategyType strategy, Soldier soldierDetails) {
+            Console.WriteLine("Anzahl " + unitCaption);
+            uint soldierCount = Convert.ToUInt32(Console.ReadLine());
+            Unit u = new Unit(unitCaption, soldierCount, strategy, soldierDetails);
+            p.AddUnit(u);
+            Console.WriteLine("Übrige Ressourcen: " + p.Ressources + Environment.NewLine);
         }
 
         public static void ErrorMessage(string message)
