@@ -10,22 +10,53 @@ namespace LetsFight
     {
         private string playerName;
         private bool isBot;
-        private int ressources,
-            villageCounter,
-            offensiveUnits,
-            defensiveUnits,
+        private uint ressources,
             lostVillages,
-            capturedVillages;
+            capturedVillages = 0;
+        private List<Unit> offensiveUnits, defensiveUnits;
         public const int MAX_RESSOURCES = 10000;
 
-        public Player(bool isBot, int count) : this(null, isBot, count) {
+        public Player(bool isBot, uint count) : this(null, isBot, count) {
 
         }
 
-        public Player(string playerName, bool isBot, int count) {
+        public Player(string playerName, bool isBot, uint count) {
             this.playerName = isBot ? "bot_" + (char)count : (playerName != null) ? playerName : "player_" + (char)count;
             this.isBot = isBot;
             this.ressources = MAX_RESSOURCES;
+        }
+
+        public void AddRessources(uint amount) {
+            uint newResAmount = 0;
+            this.ressources = ((newResAmount = this.ressources + amount) <= MAX_RESSOURCES)
+                ? newResAmount
+                : MAX_RESSOURCES;
+        }
+
+        public void RemoveRessources(uint amount) {
+            this.ressources = (amount > this.ressources)
+                ? 0
+                : this.ressources - amount;
+        }
+
+        public void AddVillage() {
+            this.capturedVillages++;
+        }
+
+        public void RemoveVillage() {
+            this.lostVillages++;
+        }
+
+        public void AddUnit(Unit unit) {
+            this.RemoveRessources(unit.RessourceCost);
+            switch(unit.Strategy) {
+                case Unit.StrategyType.Offensive:
+                    this.offensiveUnits.Add(unit);
+                    break;
+                case Unit.StrategyType.Defensive:
+                    this.defensiveUnits.Add(unit);
+                    break;
+            }
         }
 
         public string PlayerName {
@@ -36,38 +67,28 @@ namespace LetsFight
             get { return this.isBot; }
         }
 
-        public int Ressources {
+        public uint Ressources {
             get { return this.ressources; }
-            set {
-                this.ressources = value <= MAX_RESSOURCES
-                ? value
-                : MAX_RESSOURCES;
-            }
         }
 
-        public int VillageCounter {
-            get { return this.villageCounter; }
-            set { this.villageCounter = value; }
+        public uint VillageCounter {
+            get { return this.capturedVillages - this.lostVillages; }
         }
 
-        public int LostVillages {
+        public uint LostVillages {
             get { return this.lostVillages; }
-            set { this.lostVillages = value; }
         }
 
-        public int CapturedVillages {
+        public uint CapturedVillages {
             get { return this.capturedVillages; }
-            set { this.capturedVillages = value; }
         }
 
-        public int DefensiveUnits {
-            get { return this.defensiveUnits; }
-            set { this.defensiveUnits = value; }
+        public uint DefensiveUnits {
+            get { return (uint)this.defensiveUnits.Count; }
         }
 
-        public int OffensiveUnits {
-            get { return this.offensiveUnits; }
-            set { this.offensiveUnits = value; }
+        public uint OffensiveUnits {
+            get { return (uint)this.offensiveUnits.Count; }
         }
     }
 }
