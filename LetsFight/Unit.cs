@@ -20,9 +20,14 @@ namespace LetsFight
         private StrategyType strategy;
 
         public Unit(string caption, uint soldierCount, StrategyType strategy, Soldier soldierDetails) {
+            this.caption = caption;
             this.soldierDetails = soldierDetails;
             this.soldierCount = soldierCount;
             this.strategy = strategy;
+        }
+
+        public string Caption {
+            get { return this.caption; }
         }
 
         public uint RessourceCost {
